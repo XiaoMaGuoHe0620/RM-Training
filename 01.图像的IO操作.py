@@ -3,7 +3,6 @@ import cv2 as cv
 import matplotlib.pyplot as plt
 
 # 1 读取图像
-#img = cv.imread("/home/xiaoma/Downloads/1.jpeg") 
 img = cv.imread("1.jpeg",0) 
 
 # 2 显示图像
