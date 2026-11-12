@@ -12,9 +12,8 @@ img = cv.imread("1.jpeg",0)
 # k = cv.waitKey(0)
 
 # 2.2 在matplotlib中展示图像
-#plt.imshow(img[:,:,::-1])
 plt.imshow(img,cmap=plt.cm.gray)
 plt.show()
 
-# # 3 保存图像
+# 3 保存图像
 cv.imwrite("UAV.png",img)
