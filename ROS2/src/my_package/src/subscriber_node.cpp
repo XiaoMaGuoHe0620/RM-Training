@@ -5,16 +5,10 @@
 #include "rclcpp/rclcpp.hpp"
 #include "example_interfaces/msg/float64_multi_array.hpp"
 #include "example_interfaces/msg/float64.hpp"
+#include "stats.h"
 
 using Float64MultiArray = example_interfaces::msg::Float64MultiArray;
 using Float64 = example_interfaces::msg::Float64;
-
-// 直接复用 8.1 中 meanLength 的函数实现
-std::optional<double> meanLength(const std::vector<double>& lengths) {
-    if (lengths.empty()) return std::nullopt;
-    double sum = std::accumulate(lengths.begin(), lengths.end(), 0.0);
-    return sum / lengths.size();
-}
 
 class SubscriberNode : public rclcpp::Node {
 public:

@@ -26,9 +26,20 @@ endif()
 add_executable(publisher_node src/publisher_node.cpp)
 ament_target_dependencies(publisher_node rclcpp example_interfaces)
 
-# 生成 subscriber_node 可执行文件
+# 1. 把 8.1 的源码编译成一个静态库（体现题目要求）
+add_library(stats_lib src/stats.cpp)
+target_include_directories(stats_lib PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(stats_lib rclcpp) # 虽然用不到，但加上无妨
+
+# 2. 生成订阅者节点
 add_executable(subscriber_node src/subscriber_node.cpp)
 ament_target_dependencies(subscriber_node rclcpp example_interfaces)
+
+# 3. 关键：把刚才生成的库链接给订阅者节点！
+target_link_libraries(subscriber_node stats_lib)
 
 # 安装规则（确保 ros2 run 能找到它们）
 install(TARGETS

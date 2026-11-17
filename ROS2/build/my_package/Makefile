@@ -211,6 +211,19 @@ publisher_node/fast:
 .PHONY : publisher_node/fast
 
 #=============================================================================
+# Target rules for targets named stats_lib
+
+# Build rule for target.
+stats_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stats_lib
+.PHONY : stats_lib
+
+# fast build rule for target.
+stats_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stats_lib.dir/build.make CMakeFiles/stats_lib.dir/build
+.PHONY : stats_lib/fast
+
+#=============================================================================
 # Target rules for targets named subscriber_node
 
 # Build rule for target.
@@ -246,6 +259,30 @@ src/publisher_node.s: src/publisher_node.cpp.s
 src/publisher_node.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/publisher_node.dir/build.make CMakeFiles/publisher_node.dir/src/publisher_node.cpp.s
 .PHONY : src/publisher_node.cpp.s
+
+src/stats.o: src/stats.cpp.o
+.PHONY : src/stats.o
+
+# target to build an object file
+src/stats.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stats_lib.dir/build.make CMakeFiles/stats_lib.dir/src/stats.cpp.o
+.PHONY : src/stats.cpp.o
+
+src/stats.i: src/stats.cpp.i
+.PHONY : src/stats.i
+
+# target to preprocess a source file
+src/stats.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stats_lib.dir/build.make CMakeFiles/stats_lib.dir/src/stats.cpp.i
+.PHONY : src/stats.cpp.i
+
+src/stats.s: src/stats.cpp.s
+.PHONY : src/stats.s
+
+# target to generate assembly for a file
+src/stats.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stats_lib.dir/build.make CMakeFiles/stats_lib.dir/src/stats.cpp.s
+.PHONY : src/stats.cpp.s
 
 src/subscriber_node.o: src/subscriber_node.cpp.o
 .PHONY : src/subscriber_node.o
@@ -287,10 +324,14 @@ help:
 	@echo "... my_package_uninstall"
 	@echo "... uninstall"
 	@echo "... publisher_node"
+	@echo "... stats_lib"
 	@echo "... subscriber_node"
 	@echo "... src/publisher_node.o"
 	@echo "... src/publisher_node.i"
 	@echo "... src/publisher_node.s"
+	@echo "... src/stats.o"
+	@echo "... src/stats.i"
+	@echo "... src/stats.s"
 	@echo "... src/subscriber_node.o"
 	@echo "... src/subscriber_node.i"
 	@echo "... src/subscriber_node.s"

@@ -633,4 +633,6 @@ CMakeFiles/subscriber_node.dir/src/subscriber_node.cpp.o: \
  /opt/ros/humble/include/example_interfaces/example_interfaces/msg/detail/float64__struct.hpp \
  /opt/ros/humble/include/example_interfaces/example_interfaces/msg/detail/float64__builder.hpp \
  /opt/ros/humble/include/example_interfaces/example_interfaces/msg/detail/float64__traits.hpp \
- /opt/ros/humble/include/example_interfaces/example_interfaces/msg/detail/float64__type_support.hpp
+ /opt/ros/humble/include/example_interfaces/example_interfaces/msg/detail/float64__type_support.hpp \
+ /home/xiaoma/my-notes/ROS2/src/my_package/include/stats.h \
+ /usr/include/c++/11/cstddef

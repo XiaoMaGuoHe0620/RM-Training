@@ -1,6 +1,7 @@
 /home/xiaoma/my-notes/ROS2/build/my_package/CMakeFiles/uninstall.dir
 /home/xiaoma/my-notes/ROS2/build/my_package/CMakeFiles/my_package_uninstall.dir
 /home/xiaoma/my-notes/ROS2/build/my_package/CMakeFiles/publisher_node.dir
+/home/xiaoma/my-notes/ROS2/build/my_package/CMakeFiles/stats_lib.dir
 /home/xiaoma/my-notes/ROS2/build/my_package/CMakeFiles/subscriber_node.dir
 /home/xiaoma/my-notes/ROS2/build/my_package/CMakeFiles/test.dir
 /home/xiaoma/my-notes/ROS2/build/my_package/CMakeFiles/edit_cache.dir
