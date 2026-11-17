@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/xiaoma/my-notes/C++与CMake/build",
+  "command": "/usr/bin/c++  -I/home/xiaoma/my-notes/C++与CMake/include -g -std=gnu++17 -o CMakeFiles/stats_lib.dir/src/stats.cpp.o -c /home/xiaoma/my-notes/C++与CMake/src/stats.cpp",
+  "file": "/home/xiaoma/my-notes/C++与CMake/src/stats.cpp"
+},
+{
+  "directory": "/home/xiaoma/my-notes/C++与CMake/build",
+  "command": "/usr/bin/c++  -I/home/xiaoma/my-notes/C++与CMake/include -g -std=gnu++17 -o CMakeFiles/main_test.dir/main.cpp.o -c /home/xiaoma/my-notes/C++与CMake/main.cpp",
+  "file": "/home/xiaoma/my-notes/C++与CMake/main.cpp"
+}
+]
