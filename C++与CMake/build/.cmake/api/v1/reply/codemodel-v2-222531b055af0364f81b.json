@@ -41,14 +41,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "main_test::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-main_test-Debug-f8fdc1c8d0007b9d3803.json",
+					"jsonFile" : "target-main_test-Debug-ec6bf33da172c2086d77.json",
 					"name" : "main_test",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "stats_lib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-stats_lib-Debug-fc953fcf5d34a0ffa14f.json",
+					"jsonFile" : "target-stats_lib-Debug-95e085a1801dc7e3b05e.json",
 					"name" : "stats_lib",
 					"projectIndex" : 0
 				}
