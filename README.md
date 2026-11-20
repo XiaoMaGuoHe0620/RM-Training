@@ -47,12 +47,12 @@ ros2 run my_package subscriber_node
 
 ## 四、遇到的问题和解决方案
 
-1. **问题：VSCode 里面 rclcpp、example_interfaces 头文件红色波浪线，但是 colcon build 编译正常**
-原因：VSCode 的 IntelliSense 没有 ROS2 头文件搜索路径。
-解决：配置 `.vscode/c_cpp_properties.json`，添加 ROS2 的 include 路径，或者启动 VSCode 前先 source ROS2 环境。
-2. **问题：编译报错 undefined reference to meanLength**
-原因：CMakeLists.txt 没有把 stats_lib 库链接给订阅节点。
-解决：增加 `target_link_libraries(subscriber_node stats_lib)`。
-3. **问题：ros2 run 提示找不到节点**
-原因：CMake 没有写 install 安装规则，或者没有 source install/setup.bash。
-解决：补充 install (TARGETS ...)，每次编译后 source 环境。
+1. **问题：VSCode 里面 rclcpp、example_interfaces 头文件红色波浪线，但是 colcon build 编译正常**  
+原因：VSCode 的 IntelliSense 没有 ROS2 头文件搜索路径。  
+解决：配置 `.vscode/c_cpp_properties.json`，添加 ROS2 的 include 路径，或者启动 VSCode 前先 source ROS2 环境。  
+2. **问题：编译报错 undefined reference to meanLength**  
+原因：CMakeLists.txt 没有把 stats_lib 库链接给订阅节点。  
+解决：增加 `target_link_libraries(subscriber_node stats_lib)`。  
+3. **问题：ros2 run 提示找不到节点**  
+原因：CMake 没有写 install 安装规则，或者没有 source install/setup.bash。  
+解决：补充 install (TARGETS ...)，每次编译后 source 环境。  
