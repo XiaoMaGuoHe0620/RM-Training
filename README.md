@@ -21,12 +21,13 @@ ros2 run my_package publisher_node
 
 # 【终端2】启动订阅节点
 ros2 run my_package subscriber_node
+```
 
-二、节点、话题、消息类型与输入输出
-| 节点名 | 作用 | 话题名 | 消息类型 |
-| ---- | ---- | ---- | ---- |
-| publisher_node | 循环发布数组 | /input_lengths | example_interfaces/msg/Float64MultiArray |
-| subscriber_node | 接收数组、计算均值、发布结果 | /mean_output | example_interfaces/msg/Float64 |
+## 二、节点、话题、消息类型与输入输出
+| 节点名          | 作用                           | 话题名         | 消息类型                                 |
+| --------------- | ------------------------------ | -------------- | ---------------------------------------- |
+| publisher_node  | 循环发布数组                   | /input_lengths | example_interfaces/msg/Float64MultiArray |
+| subscriber_node | 接收数组、计算均值、发布结果   | /mean_output   | example_interfaces/msg/Float64           |
 
 循环输入三组数据：
 
@@ -36,7 +37,7 @@ ros2 run my_package subscriber_node
 
 然后循环重复上面三组。
 
-三、为什么空数组的均值不能直接返回 0
+## 三、为什么空数组的均值不能直接返回 0
 
 数学上，**空集合没有平均值**，求均值是总和除以元素个数，除以 0 属于非法运算。
 如果直接返回 0，会产生歧义：
@@ -44,7 +45,7 @@ ros2 run my_package subscriber_node
 - 分不清：是数组本身数据的均值刚好等于 0，还是因为是空数组随便填的默认值；
 所以代码使用 `std::optional<double>`，空数组返回 `std::nullopt`（代表 “无有效值”），而不是数字 0。
 
-四、遇到的问题和解决方案
+## 四、遇到的问题和解决方案
 
 1. **问题：VSCode 里面 rclcpp、example_interfaces 头文件红色波浪线，但是 colcon build 编译正常**
 原因：VSCode 的 IntelliSense 没有 ROS2 头文件搜索路径。
