@@ -23,9 +23,10 @@ ros2 run my_package publisher_node
 ros2 run my_package subscriber_node
 
 二、节点、话题、消息类型与输入输出
-节点名	作用	话题名	消息类型
-publisher_node	循环发布数组	/input_lengths	example_interfaces/msg/Float64MultiArray
-subscriber_node	接收数组、计算均值、发布结果	/mean_output	example_interfaces/msg/Float64
+| 节点名 | 作用 | 话题名 | 消息类型 |
+| ---- | ---- | ---- | ---- |
+| publisher_node | 循环发布数组 | /input_lengths | example_interfaces/msg/Float64MultiArray |
+| subscriber_node | 接收数组、计算均值、发布结果 | /mean_output | example_interfaces/msg/Float64 |
 
 循环输入三组数据：
 
