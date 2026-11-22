@@ -1,0 +1,23 @@
+# ROS2 / Colcon 构建产物
+build/
+install/
+log/
+
+# 编译生成文件
+*.o
+*.obj
+*.so
+*.exe
+
+# 日志文件
+*.log
+logs/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# IDE 和系统文件
+.vscode/
+.idea/
+.DS_Store
