@@ -1,4 +1,0 @@
-/home/xiaoma/my-notes/C++与CMake/build/CMakeFiles/stats_lib.dir
-/home/xiaoma/my-notes/C++与CMake/build/CMakeFiles/main_test.dir
-/home/xiaoma/my-notes/C++与CMake/build/CMakeFiles/edit_cache.dir
-/home/xiaoma/my-notes/C++与CMake/build/CMakeFiles/rebuild_cache.dir
