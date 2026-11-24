@@ -16,7 +16,7 @@ camera_acquire_node:
     timestamp_source: "system"
 
     # 帧率 / 分辨率（虚拟相机生效；实机分辨率以相机 SDK 实际输出为准）
-    fps: 30
+    fps: 10
     width: 640
     height: 480
     pixel_format: "rgb8"        # virtual: rgb8 | mono8
