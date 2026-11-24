@@ -1,0 +1,28 @@
+# camera_params.yaml —— camera_acquire_node 默认参数
+# 实机接入时只需改 camera_type / device_serial，无需改代码。
+camera_acquire_node:
+  ros__parameters:
+    # 取流后端：virtual（默认，无硬件可测）/ hikrobot / mindvision
+    camera_type: "virtual"
+
+    # 发布话题与坐标系
+    topic_name: "camera/image_raw"
+    frame_id: "camera"
+
+    # 设备序列号：留空 = 枚举到的第一台；实机建议填写，避免选错相机
+    device_serial: ""
+
+    # 时间戳来源：system = 节点收到帧时打系统时间；hardware = 用相机硬件时间戳
+    timestamp_source: "system"
+
+    # 帧率 / 分辨率（虚拟相机生效；实机分辨率以相机 SDK 实际输出为准）
+    fps: 30
+    width: 640
+    height: 480
+    pixel_format: "rgb8"        # virtual: rgb8 | mono8
+
+    # QoS：false = 传感器数据 BestEffort+Volatile；true = Reliable
+    qos_reliable: false
+
+    # 单次取帧超时（ms）
+    grab_timeout_ms: 1000
