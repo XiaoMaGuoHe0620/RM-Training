@@ -1,29 +1,18 @@
-// SPDX-License-Identifier: MIT
 #pragma once
+#include "base_grabber.hpp"
+#include "CameraApi.h"
 
-#include <string>
-
-#include "camera_acquire_publisher/grabber.hpp"
-
-#if USE_MINDVISION
-namespace camera_acquire {
-
-// 迈德威视（MindVision）MVSDK 后端。
-// 仅在编译时加 -DUSE_MINDVISION=ON 且装好 MVSDK 时参与编译。
-class MindVisionGrabber : public CameraGrabber {
+class MindVisionGrabber : public BaseGrabber
+{
 public:
-  MindVisionGrabber();
-  ~MindVisionGrabber() override;
-
-  bool open(const std::string& serial) override;
-  bool grab(RawFrame& frame, int timeout_ms) override;
-  void close() override;
-
+    MindVisionGrabber();
+    ~MindVisionGrabber() override;
+    bool Open() override;
+    void Close() override;
+    bool GetFrame(sensor_msgs::msg::Image &img_msg) override;
 private:
-  void* handle_ = nullptr;
-  bool grabbing_ = false;
-  bool opened_ = false;
+    int hCamera_ = -1;
+    bool is_opened_ = false;
+    unsigned char* rgb_buf_ = nullptr;
+    int channel_ = 3;
 };
-
-}  // namespace camera_acquire
-#endif  // USE_MINDVISION

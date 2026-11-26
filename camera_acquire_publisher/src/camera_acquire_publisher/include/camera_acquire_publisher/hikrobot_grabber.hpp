@@ -1,29 +1,18 @@
-// SPDX-License-Identifier: MIT
 #pragma once
+#include "base_grabber.hpp"
+#include "MvCameraControl.h"
 
-#include <string>
-
-#include "camera_acquire_publisher/grabber.hpp"
-
-#if USE_HIKROBOT
-namespace camera_acquire {
-
-// 海康机器人（Hikrobot）MVS SDK 后端。
-// 仅在编译时加 -DUSE_HIKROBOT=ON 且装好 MVS SDK 时参与编译。
-class HikRobotGrabber : public CameraGrabber {
+class HikRobotGrabber : public BaseGrabber
+{
 public:
-  HikRobotGrabber();
-  ~HikRobotGrabber() override;
-
-  bool open(const std::string& serial) override;
-  bool grab(RawFrame& frame, int timeout_ms) override;
-  void close() override;
-
+    HikRobotGrabber();
+    ~HikRobotGrabber() override;
+    bool Open() override;
+    void Close() override;
+    bool GetFrame(sensor_msgs::msg::Image &img_msg) override;
 private:
-  void* handle_ = nullptr;
-  bool grabbing_ = false;
-  bool opened_ = false;
+    void* handle_ = nullptr;
+    bool opened_ = false;
+    unsigned char* rgb_buf_ = nullptr;
+    int buf_size_ = 0;
 };
-
-}  // namespace camera_acquire
-#endif  // USE_HIKROBOT

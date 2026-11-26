@@ -1,29 +1,21 @@
-// SPDX-License-Identifier: MIT
 #pragma once
+#include "base_grabber.hpp"
+#include <opencv2/opencv.hpp>
+#include <chrono>
 
-#include <cstdint>
-#include <string>
-
-#include "camera_acquire_publisher/grabber.hpp"
-
-namespace camera_acquire {
-
-// 虚拟相机：无需任何硬件与 SDK，程序生成逐帧变化的 RGB8 图像，
-// 用于在没有实机时完成编译、发布、QoS、时间戳、退出释放与重启恢复的全部验证。
-class VirtualGrabber : public CameraGrabber {
+class VirtualGrabber : public BaseGrabber
+{
 public:
-  VirtualGrabber(uint32_t width, uint32_t height, const std::string& encoding);
-
-  bool open(const std::string& serial) override;
-  bool grab(RawFrame& frame, int timeout_ms) override;
-  void close() override;
-
+    VirtualGrabber();
+    ~VirtualGrabber() override;
+    bool Open() override;
+    void Close() override;
+    bool GetFrame(sensor_msgs::msg::Image &img_msg) override;
 private:
-  uint32_t width_;
-  uint32_t height_;
-  std::string encoding_;
-  uint64_t tick_ = 0;
-  bool opened_ = false;
+    cv::Mat canvas_;
+    int x_ = 0;
+    int dir_ = 1;
+    bool opened_ = false;
+    const int width_ = 640;
+    const int height_ = 480;
 };
-
-}  // namespace camera_acquire

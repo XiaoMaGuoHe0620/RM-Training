@@ -1,68 +1,44 @@
-// SPDX-License-Identifier: MIT
 #include "camera_acquire_publisher/virtual_grabber.hpp"
 
-#include <cmath>
-
-namespace camera_acquire {
-
-VirtualGrabber::VirtualGrabber(uint32_t width, uint32_t height,
-                               const std::string& encoding)
-    : width_(width), height_(height), encoding_(encoding) {
-  // 虚拟相机只保证 rgb8 / mono8 两种输出，其它编码按 rgb8 处理
-  if (encoding_ != "rgb8" && encoding_ != "mono8") {
-    encoding_ = "rgb8";
-  }
+VirtualGrabber::VirtualGrabber()
+{
 }
 
-bool VirtualGrabber::open(const std::string& /*serial*/) {
-  opened_ = true;
-  return true;
+VirtualGrabber::~VirtualGrabber()
+{
+    Close();
 }
 
-bool VirtualGrabber::grab(RawFrame& frame, int /*timeout_ms*/) {
-  if (!opened_) return false;
-
-  ++tick_;
-  frame.frame_id_seq = tick_;
-  frame.width = width_;
-  frame.height = height_;
-  frame.encoding = encoding_;
-  frame.hardware_timestamp_ns = 0;  // 由节点用系统时间打戳
-
-  const bool mono = (encoding_ == "mono8");
-  const uint32_t channels = mono ? 1u : 3u;
-  frame.data.resize(static_cast<size_t>(width_) * height_ * channels);
-
-  // 运动目标：白色方块按正弦轨迹移动，画面每帧都在变（对应“现场画面变化时图像随之更新”）
-  const double cx = width_ / 2.0 + (width_ / 2.0 - 80.0) * std::sin(tick_ * 0.05);
-  const double cy = height_ / 2.0 + (height_ / 2.0 - 80.0) * std::cos(tick_ * 0.07);
-  const uint32_t half = 30;
-
-  for (uint32_t y = 0; y < height_; ++y) {
-    for (uint32_t x = 0; x < width_; ++x) {
-      size_t idx = (static_cast<size_t>(y) * width_ + x) * channels;
-      // 背景：水平/垂直渐变 + 随时间变化的蓝色分量，保证相邻帧不同
-      uint8_t r = static_cast<uint8_t>(x * 255 / width_);
-      uint8_t g = static_cast<uint8_t>(y * 255 / height_);
-      uint8_t b = static_cast<uint8_t>(128 + 127 * std::sin(tick_ * 0.1));
-      // 运动白块
-      if (x > cx - half && x < cx + half && y > cy - half && y < cy + half) {
-        r = g = b = 255;
-      }
-      if (mono) {
-        frame.data[idx] = static_cast<uint8_t>((r + g + b) / 3);
-      } else {
-        frame.data[idx + 0] = r;
-        frame.data[idx + 1] = g;
-        frame.data[idx + 2] = b;
-      }
-    }
-  }
-  return true;
+bool VirtualGrabber::Open()
+{
+    if(opened_) return true;
+    opened_ = true;
+    RCLCPP_INFO(rclcpp::get_logger("virtual_grabber"), "Virtual camera open ok");
+    return true;
 }
 
-void VirtualGrabber::close() {
-  opened_ = false;
+void VirtualGrabber::Close()
+{
+    opened_ = false;
+    RCLCPP_INFO(rclcpp::get_logger("virtual_grabber"), "Virtual camera closed");
 }
 
-}  // namespace camera_acquire
+bool VirtualGrabber::GetFrame(sensor_msgs::msg::Image &img_msg)
+{
+    if(!opened_) return false;
+    canvas_ = cv::Mat::zeros(height_, width_, CV_8UC3);
+    cv::rectangle(canvas_, cv::Rect(x_, 200, 60, 60), cv::Scalar(0,0,255), -1);
+    x_ += dir_ * 3;
+    if(x_ > width_ - 60) dir_ = -1;
+    if(x_ < 0) dir_ = 1;
+
+    img_msg.header.stamp = rclcpp::Clock().now();
+    img_msg.header.frame_id = "camera";
+    img_msg.height = canvas_.rows;
+    img_msg.width = canvas_.cols;
+    img_msg.encoding = "bgr8";
+    img_msg.step = canvas_.cols * 3;
+    img_msg.data.resize(canvas_.total() * canvas_.elemSize());
+    memcpy(img_msg.data.data(), canvas_.data, img_msg.data.size());
+    return true;
+}

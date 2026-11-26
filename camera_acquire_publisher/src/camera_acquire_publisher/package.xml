@@ -2,30 +2,18 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>camera_acquire_publisher</name>
-  <version>1.0.0</version>
-  <description>
-    ROS 2 C++ 工业相机取流与图像发布节点。
-    默认使用内置虚拟相机（无实机/无 SDK 即可编译、运行、验收）；
-    通过 CMake 选项可接入海康机器人 MVS SDK 与迈德威视 MVSDK，实现实机取流。
-    发布 sensor_msgs/msg/Image 未标注原图。
-  </description>
-  <maintainer email="you@example.com">your_name</maintainer>
-  <license>MIT</license>
+  <version>0.0.0</version>
+  <description>Camera acquire publisher: virtual / mindvision / hikrobot</description>
+  <maintainer email="xiaoma@xxx.com">xiaoma</maintainer>
+  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-
   <depend>rclcpp</depend>
   <depend>sensor_msgs</depend>
-
-  <!-- 可选：实机 SDK 后端需要，默认不安装、不参与编译 -->
-  <!-- 海康机器人 MVS SDK：提供 libMvCameraControl.so -->
-  <!-- 迈德威视 MVSDK：提供 libMVSDK.so（或 libmvSDK.so，以实际安装为准） -->
-  <!-- 可选：tools/save_one_frame.py 使用 cv_bridge + OpenCV 保存 PNG -->
-  <exec_depend>cv_bridge</exec_depend>
+  <depend>opencv</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
-
   <export>
     <build_type>ament_cmake</build_type>
   </export>
