@@ -72,7 +72,7 @@ bool HikRobotGrabber::GetFrame(sensor_msgs::msg::Image &img_msg)
     stConvertParam.pSrcData = stFrame.pBufAddr;
     stConvertParam.nSrcDataLen = stFrame.stFrameInfo.nFrameLen;
     stConvertParam.enSrcPixelType = stFrame.stFrameInfo.enPixelType;
-    stConvertParam.enDstPixelType = PixelType_Gvsp_BGR8;
+    stConvertParam.enDstPixelType = PixelType_Gvsp_BGR8_Packed;
     if(!rgb_buf_)
     {
         buf_size_ = stFrame.stFrameInfo.nWidth * stFrame.stFrameInfo.nHeight * 3;
